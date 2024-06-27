@@ -70,7 +70,7 @@ const AdminDashboard = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:4001/book");
+      const response = await axios.get("https://book-store-app-main-lake.vercel.app/book");
       setBooks(response.data);
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -89,9 +89,9 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       if (formData._id) {
-        await axios.put(`http://localhost:4001/book/${formData._id}`, formData);
+        await axios.put(`https://book-store-app-main-lake.vercel.app/book/${formData._id}`, formData);
       } else {
-        await axios.post("http://localhost:4001/book/create", formData);
+        await axios.post("https://book-store-app-main-lake.vercel.app/book/create", formData);
       }
       setFormData({
         name: "",
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4001/book?id=${id}`);
+      await axios.delete(`https://book-store-app-main-lake.vercel.app/book?id=${id}`);
       fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error);

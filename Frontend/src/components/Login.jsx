@@ -21,8 +21,8 @@ function Login() {
     };
 
     const loginUrl = isAdmin
-      ? "http://localhost:4001/admin/login"
-      : "http://localhost:4001/user/login";
+      ? "https://book-store-app-main-lake.vercel.app/admin/login"
+      : "https://book-store-app-main-lake.vercel.app/user/login";
 
     await axios
       .post(loginUrl, userInfo)

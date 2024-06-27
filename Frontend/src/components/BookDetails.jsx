@@ -10,7 +10,7 @@ function BookDetail() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:4001/book");
+        const res = await axios.get("https://book-store-app-main-lake.vercel.app/book");
         setBooks(res.data);
       } catch (error) {
         console.error("Error fetching books", error);
