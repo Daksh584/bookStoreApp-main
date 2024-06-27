@@ -55,7 +55,7 @@ function Navbar() {
         <Link to="/books-info">Books Info</Link>
       </li>
       <li>
-        <Link to="/cart-items">Cart Items</Link>
+        <Link to="/admin/dashboard">Admin DashBoard</Link>
       </li>
     </>
   );

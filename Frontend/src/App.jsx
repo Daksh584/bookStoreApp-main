@@ -15,7 +15,7 @@ function App() {
     <div className="dark:bg-slate-900 dark:text-white">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/dashboard" element={ authUser && authUser.isAdmin ? <AdminDashboard /> : <Navigate to="/signup" />} />
         <Route path="/books-info" element={<BooksInfo />} />
         <Route
           path="/course"
