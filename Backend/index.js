@@ -15,21 +15,17 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-}).then(() => {
-  console.log("Connected to MongoDB");
-  // Start server after successful connection
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
-}).catch((error) => {
-  console.error("Error connecting to MongoDB:", error);
-});
+mongoose.connect(process.env.MONGO_URL , {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })    .then(() => console.log("Connected to MongoDB"))
+    .catch((error) => console.log("Error: ", error));
 
 // Defining routes
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
