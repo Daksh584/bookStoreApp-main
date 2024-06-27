@@ -54,9 +54,11 @@ function Navbar() {
       <li>
         <Link to="/books-info">Books Info</Link>
       </li>
-      <li>
-        <Link to="/admin/dashboard">Admin DashBoard</Link>
-      </li>
+      {authUser && authUser.isAdmin  && (
+          <li>
+            <Link to="/admin/dashboard">Admin Dashboard</Link>
+          </li>
+        )}
     </>
   );
 

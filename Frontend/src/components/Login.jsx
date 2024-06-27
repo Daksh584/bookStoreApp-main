@@ -20,9 +20,8 @@ function Login() {
       isAdmin: isAdmin,
     };
 
-    const loginUrl = isAdmin
-      ? "https://book-store-app-main-lake.vercel.app/admin/login"
-      : "https://book-store-app-main-lake.vercel.app/user/login";
+    const loginUrl = "https://book-store-app-main-lake.vercel.app/user/login"
+
 
     await axios
       .post(loginUrl, userInfo)
@@ -33,11 +32,9 @@ function Login() {
           document.getElementById("my_modal_3").close();
           setTimeout(() => {
             localStorage.setItem("Users", JSON.stringify(res.data.user));
-            if (res.data.user.isAdmin) {
-              window.location.href = "/admin/dashboard"; // Redirect to admin dashboard
-            } else {
+        
               window.location.href = "/"; // Redirect to home
-            }
+      
           }, 1000);
         }
       })
