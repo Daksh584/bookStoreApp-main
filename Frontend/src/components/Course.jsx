@@ -3,7 +3,6 @@ import Cards from "./Cards";
 import axios from "axios";
 import { Link } from "react-router-dom";
 function Course() {
-  
   const [book, setBook] = useState([]);
   useEffect(() => {
     const getBook = async () => {
@@ -26,7 +25,7 @@ function Course() {
             <span className="text-pink-500"> Here!</span>
           </h1>
           <p className="mt-12">
-            Book is a great way to learn. One should be able to understand the importance of vook
+            Book is a great way to learn. One should be able to understand the importance of books
           </p>
           <Link to="/">
             <button className="mt-6 bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-700 duration-300">
