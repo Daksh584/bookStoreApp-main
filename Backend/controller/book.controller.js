@@ -32,7 +32,7 @@ export const createBook = async (req, res) => {
   }
 };
 
-export const getBooks = async (req, res) => {
+export const getBook = async (req, res) => {
   try {
     const books = await Book.find();
     res.status(200).json(books);
