@@ -9,13 +9,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4001;
-
+// const MONGO_URL = process.env.MONGO_URL;
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URL , {
+mongoose.connect("mongodb+srv://dakshkala04:OTVHKu32GuC2hRFU@daksh.8q47cxa.mongodb.net/?retryWrites=true&w=majority&appName=Daksh" , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })    .then(() => console.log("Connected to MongoDB"))
