@@ -26,7 +26,7 @@ const bookSchema = mongoose.Schema({
   title: String,
   OriginalPrice: Number,
   edition: String,
-  usedTime: Date,
+  usedTime: String,
   author: String,
 });
 
