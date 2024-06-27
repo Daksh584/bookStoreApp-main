@@ -1,8 +1,8 @@
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const predefinedCategories = [
   "Fiction",
@@ -18,7 +18,7 @@ const predefinedCategories = [
   // Add more categories as needed
 ];
 
-var settings = {
+const settings = {
   dots: true,
   infinite: false,
   speed: 500,
@@ -61,7 +61,10 @@ const AdminDashboard = () => {
     category: "",
     image: "",
     title: "",
-    description: "", // Added description field
+    OriginalPrice: "",
+    edition: "", // Added edition field
+    author: "", // Added author field
+    usedTime: "", // Added usedTime field
     _id: null,
   });
 
@@ -90,7 +93,17 @@ const AdminDashboard = () => {
       } else {
         await axios.post("http://localhost:4001/book/create", formData);
       }
-      setFormData({ name: "", price: "", category: "", image: "", title: "", description: "", _id: null });
+      setFormData({
+        name: "",
+        price: "",
+        category: "",
+        image: "",
+        title: "",
+        edition: "",
+        author: "",
+        usedTime: "",
+        _id: null,
+      });
       fetchBooks();
     } catch (error) {
       console.error("Error saving book:", error);
@@ -98,7 +111,18 @@ const AdminDashboard = () => {
   };
 
   const handleEdit = (book) => {
-    setFormData(book);
+    setFormData({
+      _id: book._id,
+      name: book.name,
+      price: book.price,
+      category: book.category,
+      image: book.image,
+      title: book.title,
+      OriginalPrice: book.OriginalPrice,
+      edition: book.edition,
+      author: book.author,
+      usedTime: book.usedTime,
+    });
   };
 
   const handleDelete = async (id) => {
@@ -110,65 +134,57 @@ const AdminDashboard = () => {
     }
   };
 
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      price: "",
+      category: "",
+      image: "",
+      title: "",
+      OriginalPrice: "",
+      edition: "",
+      author: "",
+      usedTime: "",
+      _id: null,
+    });
+  };
+
   return (
-    <div>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7" />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a>Homepage</a></li>
-              <li><a>Portfolio</a></li>
-              <li><a>About</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">Admin Dashboard</a>
-        </div>
-        <div className="navbar-end">
-          <button className="btn btn-ghost btn-circle">
+    <div className="container mx-auto mt-5 p-5">
+      <div className="flex justify-between items-center mb-5">
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <div className="flex space-x-4">
+          <button className="btn btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor">
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </button>
-          <button className="btn btn-ghost btn-circle">
+          <button className="btn btn-ghost">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
               </svg>
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
@@ -176,87 +192,161 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Name Of The Book</span>
-          </div>
-          <input type="text" name="name" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={formData.name} onChange={handleChange} />
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 mb-5">
+        <label className="form-control">
+          <span className="label-text">Name of the Book</span>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter book name"
+            className="input input-bordered"
+            value={formData.name}
+            onChange={handleChange}
+          />
         </label>
 
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Price</span>
-          </div>
-          <input type="text" name="price" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={formData.price} onChange={handleChange} />
+        <label className="form-control">
+          <span className="label-text">Description</span>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter Description"
+            className="input input-bordered"
+            value={formData.title}
+            onChange={handleChange}
+          />
         </label>
 
-        <details className="dropdown">
-          <summary className="btn m-1">Select Category</summary>
-          <div className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="w-full p-2 border rounded-md outline-none"
-            >
-              <option value="">Select category...</option>
-              {predefinedCategories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </details>
-
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Image of the Book</span>
-          </div>
-          <input type="text" name="image" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={formData.image} onChange={handleChange} />
+        <label className="form-control">
+          <span className="label-text">Price</span>
+          <input
+            type="text"
+            name="price"
+            placeholder="Enter price"
+            className="input input-bordered"
+            value={formData.price}
+            onChange={handleChange}
+          />
         </label>
 
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Description of the Book</span>
-          </div>
-          <input type="text" name="Description" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={formData.title} onChange={handleChange} />
+        <label className="form-control">
+          <span className="label-text">Select Category</span>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="input input-bordered"
+          >
+            <option value="">Select category...</option>
+            {predefinedCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </label>
 
-        <button style={{ backgroundColor: "Blue" }} className="btn btn-wide" type="submit">
+        <label className="form-control">
+          <span className="label-text">Image of the Book</span>
+          <input
+            type="text"
+            name="image"
+            placeholder="Enter image URL"
+            className="input input-bordered"
+            value={formData.image}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label className="form-control">
+          <span className="label-text">Original Price</span>
+          <input
+            type="text"
+            name="OriginalPrice"
+            placeholder="Enter price"
+            className="input input-bordered"
+            value={formData.OriginalPrice}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label className="form-control">
+          <span className="label-text">Edition</span>
+          <input
+            type="text"
+            name="edition"
+            placeholder="Enter edition"
+            className="input input-bordered"
+            value={formData.edition}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label className="form-control">
+          <span className="label-text">Author</span>
+          <input
+            type="text"
+            name="author"
+            placeholder="Enter author name"
+            className="input input-bordered"
+            value={formData.author}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label className="form-control">
+          <span className="label-text">Used Time</span>
+          <input
+            type="text"
+            name="usedTime"
+            placeholder="Enter used time"
+            className="input input-bordered"
+            value={formData.usedTime}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button
+          style={{ backgroundColor: "blue" }}
+          className="btn btn-wide"
+          type="submit"
+        >
           {formData._id ? "Update Book" : "Add Book"}
         </button>
       </form>
 
-
-      <h2>Books List</h2>
-      <Slider {...settings}>
+      <h2 className="text-2xl font-bold mb-3">Books List</h2>
+      <Slider {...settings} className="mb-5">
         {books.map((book) => (
-          <div className="card bg-base-100 w-96 shadow-xl" key={book._id}>
+          <div className="card bg-base-100 w-full max-w-sm shadow-xl" key={book._id}>
             <figure>
-              <img src={book.image} alt={book.name} />
+              <img src={book.image} alt={book.name} className="w-full" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{book.name}</h2>
-              <p>{book.title}</p>
-              <p>Price: {book.price}</p>
-              <p>Category: {book.category}</p>
-              <div className="card-actions justify-end">
-                <button onClick={() => handleEdit(book)} className="btn btn-primary">Edit</button>
-                <button onClick={() => handleDelete(book._id)} className="btn btn-primary">Delete</button>
+              <p className="text-sm">{book.title}</p>
+              <p className="text-sm">Price: {book.price}</p>
+              <p className="text-sm">Category: {book.category}</p>
+              <div className="flex justify-end mt-2 space-x-2">
+                <button
+                  onClick={() => handleEdit(book)}
+                  className="btn btn-primary"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(book._id)}
+                  className="btn btn-primary"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
-        ))} 
-          </Slider>
+        ))}
+      </Slider>
     </div>
   );
 };
 
 export default AdminDashboard;
-
-
-
-
-      
