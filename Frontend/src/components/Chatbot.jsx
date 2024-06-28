@@ -31,7 +31,7 @@ const BookInfoGenerator = () => {
             {
               role: "user",
               parts: [
-                {text: `I want you talk to me about the book ${title} like a friend . I might ask some questions to you in the run .`},
+                {text: `I want you talk to me about the book ${title} like a friend . I might ask some questions to you in the run . Don't Add bold letters and italic`},
               ],
             },
             {
@@ -58,11 +58,14 @@ run();
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Book Information Generator</h1>
-      <input
+      
+      
+      {bookInfo && <p className="mt-4">{bookInfo}</p>}
+      <textarea
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="form-control mb-4"
+    className="textarea w-full" placeholder="Ask About the book"
       />
       <button
         className="btn btn-primary mb-4"
@@ -71,7 +74,6 @@ run();
       >
         {loading ? "Fetching..." : "Get Book Info"}
       </button>
-      {bookInfo && <p className="mt-4">{bookInfo}</p>}
     </div>
   );
 };
