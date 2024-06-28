@@ -62,9 +62,9 @@ function Freebook() {
     <>
       <div className=" max-w-screen-2xl container mx-auto md:px-20 px-4">
         <div>
-          <h1 className="font-semibold text-xl pb-2">Free Offered Courses</h1>
+          <h1 className="font-semibold text-xl pb-2">Books To Buy!</h1>
           <p>
-            Book your free course and get a lifetime access.
+            Buy Used Books for Cheap <span className="text-pink-500">Here!</span>
           </p>
         </div>
 

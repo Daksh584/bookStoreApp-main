@@ -32,9 +32,7 @@ function Login() {
           document.getElementById("my_modal_3").close();
           setTimeout(() => {
             localStorage.setItem("Users", JSON.stringify(res.data.user));
-        
               window.location.href = "/"; // Redirect to home
-      
           }, 1000);
         }
       })

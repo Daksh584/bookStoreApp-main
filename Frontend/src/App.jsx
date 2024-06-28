@@ -8,6 +8,8 @@ import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
 import AdminDashboard from "./components/Admin";
 import BookDetail from "./components/BookDetails";
+import  BookInfoGenerator  from "./components/Chatbot.jsx";
+
 
 function App() {
   const [authUser] = useAuth();
@@ -16,12 +18,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin/dashboard" element={ authUser && authUser.isAdmin ? <AdminDashboard /> : <Navigate to="/signup" />} />
-        <Route path="/books-info" element={<BooksInfo />} />
+        <Route path="/books-info" element={authUser ? <BooksInfo /> : <Navigate to="/signup" />} />
         <Route
           path="/course"
           element={authUser ? <Courses /> : <Navigate to="/signup" />}
         />
         <Route path="/book/:id" element={<BookDetail />} />
+        <Route path="/chat/:title" element={<BookInfoGenerator/>} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <Toaster />

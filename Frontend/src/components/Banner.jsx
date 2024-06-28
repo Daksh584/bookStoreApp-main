@@ -16,7 +16,7 @@ function Banner() {
             </p>
           </div>
           <Link to="/books-info">
-          <button className="btn mt-6 btn-secondary" >Get Any Book Info Now!!</button></Link>
+          <button className="btn mt-6 btn-secondary" >Chat About Any Book With Our AI !! </button></Link>
         </div>
         <div className=" order-1 w-full mt-20 md:w-1/2">
           <img
