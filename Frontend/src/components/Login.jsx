@@ -73,9 +73,9 @@ function Login() {
                 Login as Admin
               </label>
             </div>
-            admin id : 12345@gamil.com
+            Admin id : 12345@gamil.com
             <br />
-            password : 12345678
+            Password : 12345678
 
             {/* Email */}
             <div className="mt-4 space-y-2">
