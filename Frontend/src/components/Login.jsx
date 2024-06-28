@@ -47,6 +47,7 @@ function Login() {
 
   return (
     <div>
+      
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form onSubmit={handleSubmit(onSubmit)} method="dialog">
@@ -72,6 +73,9 @@ function Login() {
                 Login as Admin
               </label>
             </div>
+            admin id : 12345@gamil.com
+            <br />
+            password : 12345678
 
             {/* Email */}
             <div className="mt-4 space-y-2">
