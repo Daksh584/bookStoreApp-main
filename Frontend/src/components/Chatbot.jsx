@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoogleGenerativeAI , HarmCategory , HarmBlockThreshold } from "@google/generative-ai";
-import dotenv from "dotenv";
 
-dotenv.config();
-const GOOGLEAPI = process.env.REACT_APP_GOOGLE_API_KEY;
+
 const BookInfoGenerator = () => {
   const [bookInfo, setBookInfo] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,6 +13,7 @@ const BookInfoGenerator = () => {
   const fetchBookInfo = async () => {
     setLoading(true);
     try {
+      const GOOGLEAPI = import.meta.env.VITE_GOOGLEAPI;
       const genAI = new GoogleGenerativeAI(GOOGLEAPI); // Replace with your actual API key
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const generationConfig = {
