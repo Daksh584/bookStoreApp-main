@@ -48,9 +48,7 @@ function Footer() {
             </a>
           </div>
         </nav>
-        <aside>
-          <p>Made by Daksh :/</p>
-        </aside>
+        
       </footer>
     </div>
   );
