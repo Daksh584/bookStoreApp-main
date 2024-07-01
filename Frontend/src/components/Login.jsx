@@ -73,7 +73,7 @@ function Login() {
                 Login as Admin
               </label>
             </div>
-            Admin id : 12345@gamil.com
+            Admin id : 12345@gmail.com
             <br />
             Password : 12345678
 
