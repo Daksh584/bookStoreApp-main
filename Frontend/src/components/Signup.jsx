@@ -28,7 +28,7 @@ function Signup() {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          toast.success("Signup Successfully");
+          toast.success("Signed up Successfully");
           localStorage.setItem("Users", JSON.stringify(res.data.user));
           if (res.data.user.isAdmin) {
             navigate("/admin/dashboard", { replace: true });

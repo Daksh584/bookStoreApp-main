@@ -3,6 +3,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const predefinedCategories = [
   "Fiction",
@@ -62,9 +64,9 @@ const AdminDashboard = () => {
     image: "",
     title: "",
     OriginalPrice: "",
-    edition: "", // Added edition field
-    author: "", // Added author field
-    usedTime: "", // Added usedTime field
+    edition: "", 
+    author: "",
+    usedTime: "", 
     _id: null,
   });
 
@@ -109,7 +111,7 @@ const AdminDashboard = () => {
       console.error("Error saving book:", error);
     }
   };
-
+  const navigate = useNavigate();
   const handleEdit = (book) => {
     setFormData({
       _id: book._id,
@@ -149,10 +151,10 @@ const AdminDashboard = () => {
     });
   };
 
-  return (
+  return (<>
     <div className="container mx-auto mt-5 p-5">
       <div className="flex justify-between items-center mb-5">
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <h1 onClick={() => navigate("/")} className="text-3xl font-bold">Admin Dashboard</h1>
         <div className="flex space-x-4">
           <button className="btn btn-ghost">
             <svg
@@ -346,6 +348,7 @@ const AdminDashboard = () => {
         ))}
       </Slider>
     </div>
+    </>
   );
 };
 
